@@ -1,7 +1,7 @@
 from typing import Final
 import os
 from dotenv import load_dotenv
-from discord import Intents, Client, Message
+from discord import Intents, Client, Message, File
 from responses import get_response
 
 load_dotenv()
@@ -25,7 +25,13 @@ async def send_message(message: Message, user_message: str) -> None:
         if is_valid:
             response: str = get_response(user_message, username)
             if response:
-                await message.channel.send(response)
+                if response.startswith('Despite all odds.'):
+                    parts = response.split(' ')
+                    file_path = parts[-1]
+                    message_text = ' '.join(parts[:-1])
+                    await message.channel.send(message_text, file=File(file_path))
+                else:
+                    await message.channel.send(response)
             else:
                 print('Response was empty, not sending a message.')
     except Exception as e:

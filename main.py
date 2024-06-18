@@ -17,7 +17,7 @@ async def send_message(message: Message, user_message: str) -> None:
         print('(Message was empty because intents were not enabled properly)')
         return
 
-    is_valid = user_message[0] == '#'
+    is_valid = user_message[0] == '#'   
     if is_valid:
         user_message = user_message[1:]
 
@@ -25,7 +25,8 @@ async def send_message(message: Message, user_message: str) -> None:
         if is_valid:
             response: str = get_response(user_message, username)
             if response:
-                if response.startswith('Despite all odds.'):
+                print(response)
+                if response.endswith('.gif'):
                     parts = response.split(' ')
                     file_path = parts[-1]
                     message_text = ' '.join(parts[:-1])

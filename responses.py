@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, choice
 import glob
 import random
 
@@ -12,11 +12,18 @@ def get_response(user_input: str, username: str) -> str:
     if lowered == 'blackflash':
         file_path_type = ["./blackflashGifs/*.gif"]
         images = glob.glob(random.choice(file_path_type))
-        random_image = random.choice(images)
-        chance = 10
+        random_gif = random.choice(images)
+        chance = 20
         roll = randint(1, chance)
         if roll == chance:
-            return f'Despite all odds. **{name_part}** hit a **Balckflash** {random_image}'
+            return choice([f'Despite all odds. **{name_part}** hit a **Balck Flash.** {random_gif}',
+                           f"Surpassing every obstacle, **{name_part}s** **Balck Flash** landed flawlessly. {random_gif}",
+                           f"And after all, **{name_part}s** **Balck Flash** connected with precision. {random_gif}",
+                           f"Unexpected and unstoppable, **{name_part}s** **Balck Flash** made contact. {random_gif}",
+                           f"Surpassing disbelief. **{name_part}** used **Balck Flash** and it struck perfectly. {random_gif}",
+                           f"Surpassing all expectations, **{name_part}** hit a **Balck Flash** dead on. {random_gif}",
+                           f"In a stunning display, **{name_part}** nailed a flawless **Balck Flash**. {random_gif}"
+                           ])
         else:
             return f"**{name_part}** couldn't land a Black Flash"
 
